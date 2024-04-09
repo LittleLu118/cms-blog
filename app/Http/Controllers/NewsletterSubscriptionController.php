@@ -7,9 +7,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NewsletterSubscriptionRequest;
 use Domains\Shared\Models\NewsletterSubscription;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Inertia\Inertia;
-use Inertia\Response;
 
 class NewsletterSubscriptionController extends Controller
 {

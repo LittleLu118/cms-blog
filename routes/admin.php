@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\Blog\SubCategoryController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\Media\GalleryController;
 use App\Http\Controllers\Admin\Media\MediaController;
+use App\Http\Controllers\Admin\Shared\NewsLetterSubscriptionController;
 use App\Http\Controllers\Admin\Shared\PublicationController;
 use App\Http\Controllers\Admin\Shared\SettingController;
 use App\Http\Controllers\MediaController as ControllersMediaController;
@@ -124,6 +125,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'p
         Route::get('/', [PublicationController::class, 'index'])->name('index');
         Route::post('/create', [PublicationController::class, 'store'])->name('store');
         Route::put('/{publication}/edit', [PublicationController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'shared', 'as' => 'shared.'], function(){
+        Route::get('/newsletter-subscriber', [NewsLetterSubscriptionController::class, 'index'])->name('newsletter.subcriber.index');
     });
 });
 

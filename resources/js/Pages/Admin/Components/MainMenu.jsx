@@ -10,6 +10,7 @@ export default ({user, className}) => {
                <MainMenuItem icon={'news-paper'} link={'admin.blog.index'} text={'Blog'} />
                <MainMenuItem icon={'photo'} link={'admin.media.index'} text={'Media'} />
                <MainMenuItem icon={'clipboard-document'} link={'admin.publication.index'} text={'Publications'} />
+               <MainMenuItem icon={'rss'} link={'admin.shared.newsletter.subcriber.index'} text={'Newsletter Subscribers'} />
           </div>
      );
 }
