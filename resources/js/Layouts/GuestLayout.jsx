@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage, Head } from '@inertiajs/react';
 import SiteTopNavigation from '@/Components/Front/SiteTopNavigation';
 import Footer from '@/Components/Footer';
 

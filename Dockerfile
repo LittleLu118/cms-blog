@@ -11,9 +11,9 @@ RUN apt-get update && apt-get install -y \
      libfreetype6-dev \
      zip \
      unzip \
+     openssl libssl-dev libcurl4-openssl-dev \
      git \
      && rm -rf /var/lib/apt/lists/*
-
 # Enable Apache modules required for Laravel.
 RUN a2enmod rewrite
 
@@ -25,7 +25,8 @@ COPY Docker/apache-config.conf /etc/apache2/sites-available/000-default.conf
 
 # Install PHP extensions.
 RUN docker-php-ext-configure gd --enable-gd --with-jpeg \
-     && docker-php-ext-install gd pdo pdo_mysql
+     && docker-php-ext-install gd pdo pdo_mysql \
+     && pecl install mongodb && docker-php-ext-enable mongodb
 
 # Install Composer globally.
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

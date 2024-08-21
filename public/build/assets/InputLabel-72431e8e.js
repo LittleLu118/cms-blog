@@ -1,0 +1,1 @@
+import{j as e}from"./index-b404b703.js";function m({value:t,is_required:s,className:n="",children:r,...a}){return e.jsxs("label",{...a,className:"block font-medium text-sm text-gray-700 "+n,children:[t||r," ",s?e.jsx("span",{className:"text-red-500",children:"*"}):null]})}export{m as I};

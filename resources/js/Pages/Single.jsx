@@ -1,4 +1,4 @@
-import { useForm } from '@inertiajs/react';
+import { useForm, Head, usePage } from '@inertiajs/react';
 import CallToAction from '@/Components/CallToAction';
 import CallToActionSimple from '@/Components/CallToActionSimple';
 import ContentSectionFull from '@/Components/ContentSectionFull';
@@ -7,7 +7,6 @@ import GallerySection from '@/Components/GallerySection';
 import MapDisplay from '@/Components/MapDisplay';
 import ContactForm from '@/Components/ContactForm';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, usePage } from '@inertiajs/react';
 import NewsLetterUpdate from '@/Components/Front/NewsLetterUpdate';
 
 export default function Single() {
@@ -40,7 +39,13 @@ export default function Single() {
 
     return (
         <GuestLayout>
-            <Head title="Welcome" />
+            <Head>
+                <title>Welcome</title>
+                <title>{app.data.name}</title>
+                <meta name="description" content={app.data.description} />
+                <meta name="keywords" content="news, local news, news app" />
+                <link rel="icon" type="image/png" href={app.data.logo.small} />
+            </Head>
             {cta ? <CallToAction appData={app.data} ctaData={cta.app} gsearchPubData={gsearchPubData} /> : null}
             {cta ? <section className="z-0 flex items-center justify-center w-full -mt-40 md:-mt-56">
                 <div className="flex items-center w-full md:container md:mx-auto">

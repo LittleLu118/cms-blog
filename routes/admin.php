@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\Shared\NewsLetterSubscriptionController;
 use App\Http\Controllers\Admin\Shared\PublicationController;
 use App\Http\Controllers\Admin\Shared\SettingController;
 use App\Http\Controllers\MediaController as ControllersMediaController;
+use App\Http\Controllers\Admin\Mongo\UserController as MongoUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'permission:admin-access']], function () {
@@ -129,6 +130,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'p
 
     Route::group(['prefix' => 'shared', 'as' => 'shared.'], function(){
         Route::get('/newsletter-subscriber', [NewsLetterSubscriptionController::class, 'index'])->name('newsletter.subcriber.index');
+    });
+
+    Route::group(['prefix' => 'mongo', 'as' => 'mongo.'], function(){
+        Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
+            Route::get('/', [MongoUserController::class, 'index'])->name('index');
+            Route::post('/{user}/verification', [MongoUserController::class, 'verification'])->name('verification');
+        });
     });
 });
 

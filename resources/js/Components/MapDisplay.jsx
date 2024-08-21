@@ -11,7 +11,6 @@ export default function MapDisplay({ mapData, mapKey, ...props }) {
      }, [mapData]);
 
      function createGoogleMap(){
-          console.log(mapData);
           let googleMap = new window.google.maps.Map(googleMapRef.current, {
                zoom: (mapData.length > 1) ? 5 : 15,
                center: (mapData.length > 1) ? { lat: 40.423584474953735, lng: - 99.95230011373597, } : { lat: parseFloat(mapData[0].location.lat), lng: parseFloat(mapData[0].location.lon), },

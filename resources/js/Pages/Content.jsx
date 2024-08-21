@@ -20,8 +20,6 @@ export default function Single() {
 
      return (
           <GuestLayout>
-               <Head title="Welcome" />
-
                {page ? displaySection(page) : <NotFound />}
           </GuestLayout>
      );
