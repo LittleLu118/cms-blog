@@ -25,14 +25,28 @@ class MongoDBService {
      public function getUsers(int $paginate = 10): array
      {
           return [
-               'statistics' => $this->formatUserCollection($this->connection->collection($this->collection)->get()),
-               'users' => $this->formatUser($this->connection->collection($this->collection)->paginate($paginate))
+               'statistics' => [
+                    'count_users' => 0,
+                    'male' => ['count' => 0, 'percent' => 0],
+                    'female' => ['count' => 0, 'percent' => 0],
+                    'verified_users' => ['count' => 0, 'percent' => 0]
+               ], // $this->formatUserCollection($this->connection->collection($this->collection)->get()),
+               'users' => [
+
+               ] // $this->formatUser($this->connection->collection($this->collection)->paginate($paginate))
           ];
      }
 
      public function getPosts(): array
      {
-          return $this->formatPostCollection($this->connection->collection($this->collection)->get());
+          // return $this->formatPostCollection($this->connection->collection($this->collection)->get());
+          return [
+               'count_post' => 0,
+               'local_news' => ['count' => 0, 'percent' => 0],
+               'news_shared' => ['count' => 0, 'percent' => 0],
+               'user_post' => ['count' => 0, 'percent' => 0],
+               'other_post' => ['count' => 0, 'percent' => 0]
+          ];
      }
 
      public function usersList(int $paginate = 50)
