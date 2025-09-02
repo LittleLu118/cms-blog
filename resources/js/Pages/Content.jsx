@@ -1,11 +1,12 @@
-import ContentSection from '@/Components/ContentSection';
+import ContentSection from '@/Components/ContentSectionFull';
 import GallerySection from '@/Components/GallerySection';
+import NotFound from '@/Components/NotFound';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, usePage } from '@inertiajs/react';
 
 export default function Single() {
      const { info } = usePage().props;
-     const page = info.page.data;
+     const page = info.page?.data;
      
      const displaySection = (content, i) => {
           if (content.type == 'Content') {
@@ -19,9 +20,7 @@ export default function Single() {
 
      return (
           <GuestLayout>
-               <Head title="Welcome" />
-
-               {displaySection(page)}
+               {page ? displaySection(page) : <NotFound />}
           </GuestLayout>
      );
 }

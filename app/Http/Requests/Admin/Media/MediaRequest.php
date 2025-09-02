@@ -13,7 +13,7 @@ class MediaRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->allowedTo('create-media') || $this->user()->allowedTo('update-media');
+        return $this->user()->allowedTo('create-media');
     }
 
     public function rules(): array

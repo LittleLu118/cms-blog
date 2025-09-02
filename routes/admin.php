@@ -20,8 +20,11 @@ use App\Http\Controllers\Admin\Blog\SubCategoryController;
 use App\Http\Controllers\Admin\Blog\TagController;
 use App\Http\Controllers\Admin\Media\GalleryController;
 use App\Http\Controllers\Admin\Media\MediaController;
+use App\Http\Controllers\Admin\Shared\NewsLetterSubscriptionController;
+use App\Http\Controllers\Admin\Shared\PublicationController;
 use App\Http\Controllers\Admin\Shared\SettingController;
 use App\Http\Controllers\MediaController as ControllersMediaController;
+use App\Http\Controllers\Admin\Mongo\UserController as MongoUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'permission:admin-access']], function () {
@@ -116,6 +119,23 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth', 'p
             Route::post('/create', [GalleryController::class, 'store'])->name('store');
             Route::get('/{gallery:slug}/edit', [GalleryController::class, 'edit'])->name('edit');
             Route::put('/{gallery:slug}/edit', [GalleryController::class, 'update'])->name('update');
+        });
+    });
+
+    Route::group(['prefix' => 'publication', 'as' => 'publication.'], function(){
+        Route::get('/', [PublicationController::class, 'index'])->name('index');
+        Route::post('/create', [PublicationController::class, 'store'])->name('store');
+        Route::put('/{publication}/edit', [PublicationController::class, 'update'])->name('update');
+    });
+
+    Route::group(['prefix' => 'shared', 'as' => 'shared.'], function(){
+        Route::get('/newsletter-subscriber', [NewsLetterSubscriptionController::class, 'index'])->name('newsletter.subcriber.index');
+    });
+
+    Route::group(['prefix' => 'mongo', 'as' => 'mongo.'], function(){
+        Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
+            Route::get('/', [MongoUserController::class, 'index'])->name('index');
+            Route::post('/{user}/verification', [MongoUserController::class, 'verification'])->name('verification');
         });
     });
 });

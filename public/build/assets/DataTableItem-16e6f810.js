@@ -1,0 +1,1 @@
+import{j as e}from"./index-b404b703.js";const a=({...t})=>e.jsx("td",{className:"px-2 py-1 transition duration-150 ease-in-out border-b border-b-slate-200 text-slate-700",children:t.children});export{a as default};

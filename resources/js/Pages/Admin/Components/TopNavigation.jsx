@@ -10,13 +10,13 @@ export default ({user }) => {
      const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
      const { app } = usePage().props;
 
-     return (<nav className="bg-white border-b border-slate-100">
+     return (<nav className="text-yellow-800 border-b bg-amber-50 border-slate-100">
           <div className="px-4 sm:px-6 lg:px-8">
                <div className="flex justify-between h-16">
                     <div className="flex">
                          <div className="flex items-center shrink-0">
                               <Link href="/">
-                                   <ApplicationLogo name={app.data.name} logo={app.data.logo} logoClass={`h-14`} showName={false} className="block w-auto fill-current text-slate-800 h-9" />
+                                   <ApplicationLogo name={app.data.name} logo={app.data.logo} logoClass={`w-28`} showName={false} className="block w-auto fill-current text-slate-800 h-9" />
                               </Link>
                          </div>
 

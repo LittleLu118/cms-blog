@@ -8,6 +8,7 @@ use App\Http\Resources\Domains\Blog\ContentResource;
 use Domains\Blog\Models\BlogCategory;
 use Domains\Blog\Models\Content;
 use Domains\Blog\Services\PageService;
+use Domains\Shared\Models\Publication;
 use Illuminate\Support\Facades\DB;
 
 class SiteService
@@ -32,7 +33,7 @@ class SiteService
                return [
                     'type' => $menu->type,
                     'caption' => $menu->caption,
-                    'url' => $menu->url,
+                    'url' => ($menu->url == 'home') ? '/' : $menu->url,
                     'is_id' => (bool)$menu->is_id
                ];
           })->toArray();
@@ -44,15 +45,28 @@ class SiteService
                $slug = "home";
           }
 
-          $page = (new PageService())->getBySlugWithAssets($slug, true);
+          $page = (new PageService())->getBySlugWithAssetsFrontEnd($slug, true);
 
           if($page) {
                return [
                     'type' => 'Single',
-                    'data' => $page
+                    'data' => $page,
+                    'map' => Publication::active()->get()->map(function($pub){
+                         $gps = !empty($pub->gps_location) ? explode(', ', $pub->gps_location) : null;
+                         return [
+                              'name' => $pub->name,
+                              'city' => $pub->city,
+                              'state' => $pub->state,
+                              'location' => $gps ? [
+                                   'lat' => $gps[0],
+                                   'lon' => $gps[1],
+                                   'marker' => "https://static-00.iconduck.com/assets.00/map-marker-icon-342x512-gd1hf1rz.png"
+                              ] : []
+                         ];
+                    })->toArray()
                ];
           }
-
+          $slug = ($slug == "blogs") ? "newsletter" : $slug;
           $category = BlogCategory::where('slug', $slug)->first();
 
           if(!$category) {
@@ -69,5 +83,10 @@ class SiteService
                'type' => 'List',
                'data' => ContentResource::collection($contents)
           ];
+     }
+
+     public static function getMascot() : string
+     {
+          return route('file.media.full', 'ElefantMascot.png');
      }
 }
